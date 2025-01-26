@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* (All CSS from the previous response goes here) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(to bottom right, #e74c3c, #f39c12);
+            color: white;
+            overflow: hidden;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200vw;
+            height: 200vh;
+            background-image: url('https://source.unsplash.com/1920x1080/?abstract,geometric,colorful,vibrant');
+            background-repeat: no-repeat;
+            background-size: cover;
+            animation: pan 40s linear infinite;
+            opacity: 0.4;
+            z-index: -1;
+            filter: blur(3px) brightness(0.8);
+        }
+
+        @keyframes pan {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-2%, -1%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        .container { /* ... */ }
+        .container:hover { /* ... */ }
+        h1, h2 { /* ... */ }
+        label {/*...*/}
+        label:hover{/*...*/}
+        input[type="text"], input[type="password"] { /* ... */ }
+        input[type="text"]:focus, input[type="password"]:focus { /* ... */ }
+        button { /* ... */ }
+        button:hover { /* ... */ }
+        button:active{/*...*/}
+        .profile-info, .user-info { /* ... */ }
+         .container.show .profile-info, .container.show .user-info{/*...*/}
+        footer { /* ... */ }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="login">
+        <h1>Login</h1>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <button onclick="loginFunc()">Login</button>
+        <p id="error-message" style="color: red;"></p>
+    </div>
+
+    <div class="container" id="userInfo" style="display: none;">
+        <h2>User Information</h2>
+        <div class="user-info"><strong>Name:</strong> <span id="user-name"></span></div>
+        <div class="user-info"><strong>Age:</strong> <span id="user-age">23</span></div>
+        <div class="user-info"><strong>Email:</strong> <span id="user-email">Micky143@gmail.com</span></div>
+        <button onclick="goToProfile()">Go to Profile</button>
+    </div>
+
+    <div class="container" id="profile" style="display: none;">
+        <h2>Personal Profile</h2>
+        <div class="profile-info"><strong>Username:</strong> <span id="profile-username"></span></div>
+        <div class="profile-info"><strong>Email:</strong> <span id="profile-email">Micky143@gmail.com</span></div>
+        <div class="profile-info"><strong>Bio:</strong> <span id="profile-bio">Myself Sukruth from Jain University doing assignment1</span></div>
+        <button onclick="logoutFunc()">Logout</button>
+    </div>
+
+    <footer>
+        &copy; 2023 My Website. All rights reserved.
+    </footer>
+
+    <script>
+        function loginFunc() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+            const userInfoContainer = document.getElementById("userInfo");
+
+            if (username === "Maaz" && password === "Micky143") {
+                document.getElementById("login").style.display = "none";
+                userInfoContainer.style.display = "block";
+                document.getElementById("user-name").textContent = username;
+                errorMessage.textContent = "";
+                setTimeout(() => {
+                    userInfoContainer.classList.add('show');
+                }, 50);
+            } else {
+                errorMessage.textContent = "Invalid username or password.";
+            }
+        }
+
+        function goToProfile() {
+            const profileContainer = document.getElementById("profile");
+            document.getElementById("userInfo").style.display = "none";
+            profileContainer.style.display = "block";
+            document.getElementById("profile-username").textContent = document.getElementById("username").value;
+            setTimeout(() => {
+                profileContainer.classList.add('show');
+            }, 50);
+        }
+
+        function logoutFunc() {
+            document.getElementById("login").style.display = "block";
+            document.getElementById("userInfo").style.display = "none";
+            document.getElementById("profile").style.display = "none";
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById('userInfo').classList.remove('show');
+            document.getElementById('profile').classList.remove('show');
+        }
+    </script>
+
+</body>
+</html>
